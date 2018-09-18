@@ -46,16 +46,15 @@ class PublicationAdminForm(forms.ModelForm):
 
 class PublicationAdmin(admin.ModelAdmin):
     form = PublicationAdminForm
-    list_display = ('type', 'first_author', 'title', 'type', 'year', 'journal_or_book_title', 'status',)
+    list_display = ('type', 'first_author', 'title', 'type', 'year', 'journal_or_book_title',)
     list_display_links = ('title',)
-    list_filter = ('year', 'journal', 'status',)
+    list_filter = ('year', 'journal',)
     change_list_template = 'admin/publications_bootstrap/publication_change_list.html'
     search_fields = (
         'title', 'journal', 'book_title', 'authors', 'tags', 'year', 'institution', 'school', 'organization')
-    actions = ['set_status_draft', 'set_status_submitted', 'set_status_accepted', 'set_status_published']
     fieldsets = (
         (None, {
-            'fields': ('type', 'title', 'authors', 'year', 'month', 'status', 'external')}),
+            'fields': ('type', 'title', 'authors', 'year', 'month', 'external')}),
         ('All available fields (overridden if set below)', {
             'classes': ('collapse',),
             'fields': (
@@ -98,30 +97,4 @@ class PublicationAdmin(admin.ModelAdmin):
         return [url(r'^import_bibtex/$', admin_views.import_bibtex, name='publications_publication_import_bibtex'),
                 ] + super(PublicationAdmin, self).get_urls()
 
-    def _set_status(self, request, queryset, new_status):
-        rows_updated = queryset.update(status=new_status)
-        if rows_updated == 1:
-            message_bit = "1 publication was"
-        else:
-            message_bit = "{:d} publications were".format(rows_updated)
-        self.message_user(request, "{} successfully marked as {}.".format(message_bit, new_status.label))
-
-    def set_status_draft(self, request, queryset):
-        self._set_status(request, queryset, Publication.EStatuses.DRAFT)
-
-    set_status_draft.short_description = _("Mark selected %(verbose_name_plural)s as drafts")
-
-    def set_status_submitted(self, request, queryset):
-        self._set_status(request, queryset, Publication.EStatuses.SUBMITTED)
-
-    set_status_submitted.short_description = _("Mark selected %(verbose_name_plural)s as submitted")
-
-    def set_status_accepted(self, request, queryset):
-        self._set_status(request, queryset, Publication.EStatuses.ACCEPTED)
-
-    set_status_accepted.short_description = _("Mark selected %(verbose_name_plural)s as accepted")
-
-    def set_status_published(self, request, queryset):
-        self._set_status(request, queryset, Publication.EStatuses.PUBLISHED)
-
-    set_status_published.short_description = _("Mark selected %(verbose_name_plural)s as published")
+    

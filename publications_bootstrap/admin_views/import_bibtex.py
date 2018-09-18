@@ -150,8 +150,7 @@ def import_bibtex(request):
                         isbn=entry['isbn'],
                         external=False,
                         abstract=entry['abstract'],
-                        tags=entry['tags'],
-                        status=Publication.EStatuses.PUBLISHED))
+                        tags=entry['tags']))
                 else:
                     errors['bibliography'] = 'Make sure that the keys <title>, <author> and <year> are present.'
                     break
