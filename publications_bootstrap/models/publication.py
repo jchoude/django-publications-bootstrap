@@ -46,11 +46,11 @@ class Publication(models.Model):
             self.bibtex = bibtex
 
     # Status of the publication
-    class EStatuses(EChoice):
-        DRAFT = ('d', _('draft'))
-        SUBMITTED = ('s', _('submitted'))
-        ACCEPTED = ('a', _('accepted'))
-        PUBLISHED = ('p', _('published'))
+    #class EStatuses(EChoice):
+    #    DRAFT = ('d', _('draft'))
+    #    SUBMITTED = ('s', _('submitted'))
+    #    ACCEPTED = ('a', _('accepted'))
+    #    PUBLISHED = ('p', _('published'))
 
     type = models.ForeignKey(Type, db_index=False, on_delete=models.PROTECT)
     citekey = NullCharField(max_length=255, blank=True, null=True, unique=True, db_index=False,
@@ -118,7 +118,7 @@ class Publication(models.Model):
     doi = NullCharField(max_length=128, verbose_name='DOI', blank=True, null=True, unique=True)
     isbn = NullCharField(max_length=32, verbose_name='ISBN', blank=True, null=True, unique=True,
                          help_text='Only for a book.')  # A-B-C-D
-    status = make_echoicefield(EStatuses, default=EStatuses.PUBLISHED, blank=False)
+    #status = make_echoicefield(EStatuses, default=EStatuses.PUBLISHED, blank=False)
 
     def __init__(self, *args, **kwargs):
         models.Model.__init__(self, *args, **kwargs)

@@ -64,7 +64,6 @@ class Migration(migrations.Migration):
                 ('abstract', models.TextField(blank=True)),
                 ('doi', publications_bootstrap.fields.NullCharField(blank=True, max_length=128, null=True, unique=True, verbose_name='DOI')),
                 ('isbn', publications_bootstrap.fields.NullCharField(blank=True, help_text='Only for a book.', max_length=32, null=True, unique=True, verbose_name='ISBN')),
-                ('status', echoices.fields.make_echoicefield(default=PubClass.EStatuses.PUBLISHED, echoices=PubClass.EStatuses)),
             ],
             options={
                 'ordering': ['-year', '-month', '-id'],
