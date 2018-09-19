@@ -92,10 +92,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.PositiveIntegerField(db_index=True, editable=False)),
-                ('title', models.CharField(max_length=128, unique=True)),
+                ('title', models.CharField(db_index=True, max_length=128, unique=True)),
                 ('description', models.CharField(max_length=128)),
                 ('bibtex_types', models.CharField(default='article', help_text='Possible BibTex types, separated by comma.', max_length=256, verbose_name='BibTex types')),
-                ('hidden', models.BooleanField(default=False, help_text='Hide publications from main view.')),
+                ('hidden', models.BooleanField(db_index=True, default=False, help_text='Hide publications from main view.')),
             ],
             options={
                 'ordering': ('order',),
@@ -104,7 +104,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='publication',
             name='type',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='publications_bootstrap.Type'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='publications_bootstrap.Type', db_index=False),
         ),
         migrations.AddField(
             model_name='publicationlink',
