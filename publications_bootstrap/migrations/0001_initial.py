@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
             name='Publication',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('citekey', publications_bootstrap.fields.NullCharField(blank=True, help_text='BibTex citation key. Leave blank if unsure.', max_length=512, null=True, unique=True)),
+                ('citekey', publications_bootstrap.fields.NullCharField(blank=True, help_text='BibTex citation key. Leave blank if unsure.', max_length=255, null=True, unique=True)),
                 ('title', models.CharField(max_length=512)),
                 ('authors', models.CharField(help_text='List of authors separated by commas or <i>and</i>.', max_length=2048)),
                 ('year', models.PositiveIntegerField()),
