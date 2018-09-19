@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='publication',
             name='citekey',
-            field=publications_bootstrap.fields.NullCharField(blank=True, db_index=True, help_text='BibTex citation key. Leave blank if unsure.', max_length=512, null=True, unique=True),
+            field=publications_bootstrap.fields.NullCharField(blank=True, db_index=True, help_text='BibTex citation key. Leave blank if unsure.', max_length=255, null=True, unique=True),
         ),
         migrations.AlterField(
             model_name='publication',
